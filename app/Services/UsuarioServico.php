@@ -29,7 +29,7 @@ final class UsuarioServico {
             return ["sucesso" => true, "mensagem" => "Usuario autorizado", "dados" => $arrayRertorno];
         }
 
-        return ["sucesso" => false, "mensagem" => "Dados incorretos!", "dados" => []];
+        return ["sucesso" => false, "mensagem" => "CPF ou senha incorretos!", "dados" => []];
     }
 
     public static function cadastrarUsuario($dados) {

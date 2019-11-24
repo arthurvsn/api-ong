@@ -19,4 +19,15 @@ final class AgendamentoService {
         ]);
 
     }
+
+    public static function editarAgendamento($agendamento, $dados) {
+
+        $usuario = auth()->user();
+
+        return $agendamento->update([
+            'data_agendamento' => $dados['data'] . ' ' . $dados['hora'],
+            'id_servico' => $dados['servico'],
+            'id_usuario' => $usuario->id_usuario,
+        ]);
+    }
 }

@@ -24,8 +24,20 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-
         parent::boot();
+
+        Route::model('agendamento', \App\Models\Agendamento::class, function(){
+            throw new Exception("Agendamento não encontrado!");
+        });
+
+        Route::model('servico', \App\Models\Servico::class, function(){
+            throw new Exception("Serviço não encontrado!");
+        });
+
+        Route::model('usuario', \App\Models\Usuario::class, function(){
+            throw new Exception("Usuario não encontrado!");
+        });
+
     }
 
     /**

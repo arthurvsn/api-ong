@@ -17,4 +17,12 @@ class Agendamento extends Model
         'id_usuario',
         'data_agendamento',       
     ];
+
+    public function servico() {
+        return $this->belongsTo(Servico::class, 'id_servico');
+    }
+
+    public function usuario() {
+        return $this->belongsTo(Usuario::class, 'id_usuario');
+    }
 }

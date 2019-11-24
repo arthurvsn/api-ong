@@ -30,18 +30,27 @@ Route::middleware('auth:api')->group(function () {
     Route::group(['prefix' => 'servico'], function() {
 
         Route::get('/', 'ServicoController@index');
-        Route::get('/{idServico}', 'ServicoController@obterServico');
+        Route::get('{servico}', 'ServicoController@obterServico');
 
         Route::post('/', 'ServicoController@cadastrar');
+        
+        Route::put('{servico}', 'AgendamentoController@editar');
+
+        Route::delete('{servico}', 'AgendamentoController@deletar');
+
 
     });
 
     Route::group(['prefix' => 'agendamento'], function() {
 
         Route::get('/', 'AgendamentoController@index');
-        Route::get('/{idAgendamento}', 'AgendamentoController@obterAgendamento');
+        Route::get('/{agendamento}', 'AgendamentoController@obterAgendamento');
 
         Route::post('/', 'AgendamentoController@cadastrar');
+
+        Route::put('{agendamento}', 'AgendamentoController@editar');
+
+        Route::delete('{agendamento}', 'AgendamentoController@deletar');
 
     });
 });

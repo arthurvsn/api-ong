@@ -22,11 +22,11 @@ class ServicoController extends Controller
         }
     }
 
-    public function obterServico($idServico) {
+    public function obterServico($servico) {
 
         try {
 
-            return response()->json(Response::responseApi(true, 'Serviços obtidos', ['servicos' => Servico::find($idServico)]));
+            return response()->json(Response::responseApi(true, 'Serviço obtido', ['servicos' => $servico]));
 
         } catch (\Exception $e) {
             return response()->json(Response::responseApi(false, $e->getMessage()));
@@ -40,6 +40,32 @@ class ServicoController extends Controller
             $servico = ServicoService::cadastrarServico(request()->post());
 
             return response()->json(Response::responseApi(true, 'Serviços obtidos', ['servicos' => $servico]));
+
+        } catch (\Exception $e) {
+            return response()->json(Response::responseApi(false, $e->getMessage()));
+        }
+    }
+    
+    public function editar($servico) {
+
+        try {
+
+            $servico = ServicoService::editarServico($servico, request()->post());
+
+            return response()->json(Response::responseApi(true, 'Servico atualizado!', ['servicos' => $servico]));
+
+        } catch (\Exception $e) {
+            return response()->json(Response::responseApi(false, $e->getMessage()));
+        }
+    }
+
+    public function deletar($servico) {
+
+        try {
+
+            $servico->delete();
+
+            return response()->json(Response::responseApi(true, 'Servico deletado!'));
 
         } catch (\Exception $e) {
             return response()->json(Response::responseApi(false, $e->getMessage()));
