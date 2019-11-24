@@ -13,6 +13,35 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'usuario'], function() {
+    
+    Route::post('login', 'UsuarioController@loginUsuario');
+
+    Route::middleware('auth:api')->group(function () {
+
+        Route::get('/', 'UsuarioController@index');
+
+        Route::post('/', 'UsuarioController@cadastrar');
+    });
+
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::group(['prefix' => 'servico'], function() {
+
+        Route::get('/', 'ServicoController@index');
+        Route::get('/{idServico}', 'ServicoController@obterServico');
+
+        Route::post('/', 'ServicoController@cadastrar');
+
+    });
+
+    Route::group(['prefix' => 'agendamento'], function() {
+
+        Route::get('/', 'AgendamentoController@index');
+        Route::get('/{idAgendamento}', 'AgendamentoController@obterAgendamento');
+
+        Route::post('/', 'AgendamentoController@cadastrar');
+
+    });
 });
